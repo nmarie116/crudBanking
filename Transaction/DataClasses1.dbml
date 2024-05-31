@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbTransaction" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UG3BOHL;Initial Catalog=dbTransaction;Integrated Security=True" SettingsObjectName="Transaction.Properties.Settings" SettingsPropertyName="dbTransactionConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblTransaction" Member="tblTransactions">
+    <Type Name="tblTransaction">
+      <Column Name="transactionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="amount" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="transType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="transDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblUser_tblTransaction" Member="tblUser" ThisKey="userid" OtherKey="userId" Type="tblUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblUser" Member="tblUsers">
+    <Type Name="tblUser">
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="upassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="userpin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblUser_tblTransaction" Member="tblTransactions" ThisKey="userId" OtherKey="userid" Type="tblTransaction" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_DeleteUser" Method="sp_DeleteUser">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_ViewUser" Method="sp_ViewUser">
+    <ElementType Name="sp_ViewUserResult">
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="upassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="userpin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_InsertUser" Method="sp_InsertUser">
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="balance" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateUser" Method="sp_UpdateUser">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
