@@ -98,6 +98,41 @@ namespace Transaction
 			return ((ISingleResult<sp_ViewUserResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateUser")]
+		public int sp_UpdateUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string fname, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string lname, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, fname, lname, username, password);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_DeleteTra")]
+		public int sp_DeleteTra([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> transId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), transId);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_InsertTra")]
+		public int sp_InsertTra([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,2)")] System.Nullable<decimal> amount, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string tranType, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> tdate, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), amount, tranType, tdate, id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateTra")]
+		public int sp_UpdateTra([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> transId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,2)")] System.Nullable<decimal> amount, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string transType, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> tdate)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), transId, amount, transType, tdate);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ViewTra")]
+		public ISingleResult<sp_ViewTraResult> sp_ViewTra()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_ViewTraResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_InsertUser")]
 		public int sp_InsertUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string fname, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string lname, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pin, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,0)")] System.Nullable<decimal> balance)
 		{
@@ -105,11 +140,10 @@ namespace Transaction
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateUser")]
-		public int sp_UpdateUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string fname, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string lname, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ValidateLogin", IsComposable=true)]
+		public System.Nullable<bool> ValidateLogin([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, fname, lname, username, password);
-			return ((int)(result.ReturnValue));
+			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password).ReturnValue));
 		}
 	}
 	
@@ -675,6 +709,104 @@ namespace Transaction
 				if ((this._Balance != value))
 				{
 					this._Balance = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ViewTraResult
+	{
+		
+		private int _transactionId;
+		
+		private System.Nullable<decimal> _amount;
+		
+		private string _transType;
+		
+		private System.Nullable<System.DateTime> _transDate;
+		
+		private System.Nullable<int> _userid;
+		
+		public sp_ViewTraResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_transactionId", DbType="Int NOT NULL")]
+		public int transactionId
+		{
+			get
+			{
+				return this._transactionId;
+			}
+			set
+			{
+				if ((this._transactionId != value))
+				{
+					this._transactionId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_amount", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> amount
+		{
+			get
+			{
+				return this._amount;
+			}
+			set
+			{
+				if ((this._amount != value))
+				{
+					this._amount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_transType", DbType="VarChar(50)")]
+		public string transType
+		{
+			get
+			{
+				return this._transType;
+			}
+			set
+			{
+				if ((this._transType != value))
+				{
+					this._transType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_transDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> transDate
+		{
+			get
+			{
+				return this._transDate;
+			}
+			set
+			{
+				if ((this._transDate != value))
+				{
+					this._transDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="Int")]
+		public System.Nullable<int> userid
+		{
+			get
+			{
+				return this._userid;
+			}
+			set
+			{
+				if ((this._userid != value))
+				{
+					this._userid = value;
 				}
 			}
 		}

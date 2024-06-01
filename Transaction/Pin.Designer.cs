@@ -28,17 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtenterpin = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtenterpin
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(138, 121);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 0;
+            this.txtenterpin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtenterpin.Location = new System.Drawing.Point(138, 121);
+            this.txtenterpin.Name = "txtenterpin";
+            this.txtenterpin.Size = new System.Drawing.Size(100, 22);
+            this.txtenterpin.TabIndex = 0;
+            this.txtenterpin.TextChanged += new System.EventHandler(this.txtenterpin_TextChanged);
+            this.txtenterpin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtenterpin_KeyDown);
+            this.txtenterpin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtenterpin_KeyPress);
             // 
             // label1
             // 
@@ -56,9 +59,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 325);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtenterpin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Pin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pin";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -67,7 +71,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtenterpin;
         private System.Windows.Forms.Label label1;
     }
 }
