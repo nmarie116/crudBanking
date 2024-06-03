@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbTransaction" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UG3BOHL;Initial Catalog=dbTransaction;Integrated Security=True" SettingsObjectName="Transaction.Properties.Settings" SettingsPropertyName="dbTransactionConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-GEIV92QC;Initial Catalog=dbTransaction;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="Transaction.Properties.Settings" SettingsPropertyName="dbTransactionConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblTransaction" Member="tblTransactions">
     <Type Name="tblTransaction">
       <Column Name="transactionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -85,5 +85,24 @@
     <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.sp_GetInfo" Method="sp_GetInfo">
+    <ElementType Name="sp_GetInfoResult">
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="upassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="userpin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetPin" Method="GetPin" IsComposable="true">
+    <Parameter Name="pin" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetBalance" Method="GetBalance" IsComposable="true">
+    <Parameter Name="balance" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Return Type="System.Decimal" />
   </Function>
 </Database>

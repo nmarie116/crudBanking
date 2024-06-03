@@ -10,7 +10,7 @@ namespace Transaction
    
     public static class Transac
     {
-        
+        public static int id { get; set; }
         public static string Fname { get; set; }
         public static string Lname { get; set; }
         public static string Username { get; set; }

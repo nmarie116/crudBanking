@@ -39,7 +39,7 @@ namespace Transaction
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::Transaction.Properties.Settings.Default.dbTransactionConnectionString, mappingSource)
+				base(global::Transaction.Properties.Settings.Default.dbTransactionConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -144,6 +144,25 @@ namespace Transaction
 		public System.Nullable<bool> ValidateLogin([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
 		{
 			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetInfo")]
+		public ISingleResult<sp_GetInfoResult> sp_GetInfo()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_GetInfoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetPin", IsComposable=true)]
+		public System.Nullable<int> GetPin([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pin)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pin).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetBalance", IsComposable=true)]
+		public System.Nullable<decimal> GetBalance([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,2)")] System.Nullable<decimal> balance)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), balance).ReturnValue));
 		}
 	}
 	
@@ -807,6 +826,140 @@ namespace Transaction
 				if ((this._userid != value))
 				{
 					this._userid = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetInfoResult
+	{
+		
+		private int _userId;
+		
+		private string _username;
+		
+		private string _upassword;
+		
+		private System.Nullable<int> _userpin;
+		
+		private string _fname;
+		
+		private string _lname;
+		
+		private System.Nullable<int> _Balance;
+		
+		public sp_GetInfoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userId", DbType="Int NOT NULL")]
+		public int userId
+		{
+			get
+			{
+				return this._userId;
+			}
+			set
+			{
+				if ((this._userId != value))
+				{
+					this._userId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(50)")]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upassword", DbType="VarChar(50)")]
+		public string upassword
+		{
+			get
+			{
+				return this._upassword;
+			}
+			set
+			{
+				if ((this._upassword != value))
+				{
+					this._upassword = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userpin", DbType="Int")]
+		public System.Nullable<int> userpin
+		{
+			get
+			{
+				return this._userpin;
+			}
+			set
+			{
+				if ((this._userpin != value))
+				{
+					this._userpin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fname", DbType="VarChar(50)")]
+		public string fname
+		{
+			get
+			{
+				return this._fname;
+			}
+			set
+			{
+				if ((this._fname != value))
+				{
+					this._fname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lname", DbType="VarChar(50)")]
+		public string lname
+		{
+			get
+			{
+				return this._lname;
+			}
+			set
+			{
+				if ((this._lname != value))
+				{
+					this._lname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Balance", DbType="Int")]
+		public System.Nullable<int> Balance
+		{
+			get
+			{
+				return this._Balance;
+			}
+			set
+			{
+				if ((this._Balance != value))
+				{
+					this._Balance = value;
 				}
 			}
 		}

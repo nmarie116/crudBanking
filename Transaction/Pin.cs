@@ -36,9 +36,12 @@ namespace Transaction
                 e.SuppressKeyPress = true;
 
                 int pin = Convert.ToInt32(txtenterpin.Text);
-                if (pin == tblUser.userpin)
+                if (pin == Repositories.GetPin(pin))
                 {
                     MessageBox.Show("YOU HAVE SUCCESSFULLY VERIVERI");
+                    this.Hide();
+                    Transaction trans = new Transaction();
+                    trans.Show();
                 }
                 else
                 {
@@ -55,5 +58,9 @@ namespace Transaction
                 e.Handled = true;
             }
         }
+
+       
+
+        
     }
 }

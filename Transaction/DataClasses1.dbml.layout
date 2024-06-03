@@ -14,7 +14,7 @@
         <elementListCompartment Id="0f56f100-9b16-43e3-98d7-68731915db3d" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.15662310226447 : 2.65549967447917); (2.15662310226447 : 3.43525891455078); (2.26699477744364 : 3.43525891455078); (2.26699477744364 : 3.5)]" manuallyRouted="true" fixedFrom="Caller" fixedTo="Caller">
+    <associationConnector edgePoints="[(2.15662310226447 : 2.65549967447917); (2.15662310226447 : 3.43525891455078); (2.26699477744364 : 3.43525891455078); (2.26699477744364 : 3.5)]" manuallyRouted="true" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataClasses1DataContext/tblUser/tblUser_tblTransaction" />
       <nodes>
         <classShapeMoniker Id="2ca63576-027c-46c8-ab3b-3dcc3fbfae95" />

@@ -71,8 +71,25 @@ namespace Transaction
         {
             db = new DataClasses1DataContext();
             bool result = (bool)db.ValidateLogin(username, password);
-            return result;
-            
+            Transac.Username = username;
+            Transac.Password = password;
+            return result;            
+        }     
+
+        public static int GetPin(int pin)
+        {
+            db = new DataClasses1DataContext();
+            db.GetPin(pin);
+            Transac.Pin = pin;
+            return Transac.Pin = pin;
+        }
+
+        public static decimal GetBalance(int balance)
+        {
+            db = new DataClasses1DataContext();
+            db.GetBalance(balance);
+            Transac.Balance = balance;
+            return Transac.Balance = balance;
         }
     }
 }
