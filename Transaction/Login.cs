@@ -27,6 +27,7 @@ namespace Transaction
         {
             if(ValidateCredential(txtUsername.Text ,txtPassword.Text))
             {
+                User.Userid = (int)db.getUserId(txtUsername.Text, txtPassword.Text);               
                 MessageBox.Show("successfully login");
                 Clear();
                 this.Hide();
@@ -63,9 +64,10 @@ namespace Transaction
             txtUsername.Clear();
             txtPassword.Clear();
             
+            
         }
         private void btncreatereg_Click(object sender, EventArgs e)
-        {
+        {            
             if (txtfname.Text != "" || txtlname.Text != "" || txtpass.Text != "")
             {
                 tblUser.fname = txtfname.Text;
@@ -73,7 +75,7 @@ namespace Transaction
                 tblUser.username = txtuname.Text;
                 tblUser.upassword = txtpass.Text;
                 tblUser.userpin = Convert.ToInt32(txtpin.Text);
-                tblUser.Balance = 0;
+                tblUser.Balance = 0;               
                 Repositories.AddUser(tblUser);
                 pnlRegister.Visible = false;
                
@@ -111,5 +113,6 @@ namespace Transaction
                 txtpin.SelectionStart = txtpin.Text.Length;
             }
         }
+
     }
 }

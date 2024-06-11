@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbTransaction" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-GEIV92QC;Initial Catalog=dbTransaction;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="Transaction.Properties.Settings" SettingsPropertyName="dbTransactionConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UG3BOHL;Initial Catalog=dbTransaction;Integrated Security=True" SettingsObjectName="Transaction.Properties.Settings" SettingsPropertyName="dbTransactionConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblTransaction" Member="tblTransactions">
     <Type Name="tblTransaction">
       <Column Name="transactionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="amount" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="amount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="transType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="transDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -22,8 +22,8 @@
       <Association Name="tblUser_tblTransaction" Member="tblTransactions" ThisKey="userId" OtherKey="userid" Type="tblTransaction" />
     </Type>
   </Table>
-  <Function Name="dbo.sp_DeleteUser" Method="sp_DeleteUser">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.sp_DeleteTra" Method="sp_DeleteTra">
+    <Parameter Name="transId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_ViewUser" Method="sp_ViewUser">
@@ -37,16 +37,8 @@
       <Column Name="Balance" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_UpdateUser" Method="sp_UpdateUser">
+  <Function Name="dbo.sp_DeleteUser" Method="sp_DeleteUser">
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="fname" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="lname" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.sp_DeleteTra" Method="sp_DeleteTra">
-    <Parameter Name="transId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_InsertTra" Method="sp_InsertTra">
@@ -54,6 +46,15 @@
     <Parameter Name="tranType" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="tdate" Type="System.DateTime" DbType="Date" />
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_InsertUser" Method="sp_InsertUser">
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="balance" Type="System.Decimal" DbType="Decimal(18,0)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_UpdateTra" Method="sp_UpdateTra">
@@ -72,19 +73,27 @@
       <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_InsertUser" Method="sp_InsertUser">
-    <Parameter Name="fname" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="lname" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="pin" Type="System.Int32" DbType="Int" />
-    <Parameter Name="balance" Type="System.Decimal" DbType="Decimal(18,0)" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.ValidateLogin" Method="ValidateLogin" IsComposable="true">
     <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.GetPin" Method="GetPin" IsComposable="true">
+    <Parameter Name="pin" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetBalance" Method="GetBalance" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.sp_UpdateUser" Method="sp_UpdateUser">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="balance" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_GetInfo" Method="sp_GetInfo">
     <ElementType Name="sp_GetInfoResult">
@@ -94,15 +103,12 @@
       <Column Name="userpin" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="fname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="lname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Balance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.GetPin" Method="GetPin" IsComposable="true">
-    <Parameter Name="pin" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.getUserId" Method="getUserId" IsComposable="true">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.GetBalance" Method="GetBalance" IsComposable="true">
-    <Parameter Name="balance" Type="System.Decimal" DbType="Decimal(18,2)" />
-    <Return Type="System.Decimal" />
   </Function>
 </Database>

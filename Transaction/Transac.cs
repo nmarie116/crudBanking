@@ -11,13 +11,12 @@ namespace Transaction
     public static class Transac
     {
         public static int id { get; set; }
-        public static string Fname { get; set; }
-        public static string Lname { get; set; }
-        public static string Username { get; set; }
-        public static string Password { get; set; }
-        public static int Pin { get; set; }
+      
         public static decimal Balance { get; set; }
 
+        public static string  transType { get; set; } 
+        
+        public static decimal amount { get; set; }
 
     }
 }

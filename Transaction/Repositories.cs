@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace Transaction
         public static void UpdateUser(tblUser table)
         {
             db = new DataClasses1DataContext();
-            db.sp_UpdateUser(table.userId, table.fname, table.lname, table.username, table.upassword);
+            db.sp_UpdateUser(table.userId, table.fname, table.lname, table.username, table.upassword, table.Balance);
         }
 
         public static void DeleteUser(tblUser table)
@@ -66,30 +67,42 @@ namespace Transaction
             return viewUserResults;
         }
 
-        //validation function
+        //validation function 
         public static bool VLogin(string username, string password)
         {
             db = new DataClasses1DataContext();
             bool result = (bool)db.ValidateLogin(username, password);
-            Transac.Username = username;
-            Transac.Password = password;
+            User.Username = username;
+            User.Password = password;            
             return result;            
         }     
 
+        public static void GetInfo()
+        {
+            db = new DataClasses1DataContext();
+            db.sp_GetInfo();
+        }
         public static int GetPin(int pin)
         {
             db = new DataClasses1DataContext();
             db.GetPin(pin);
-            Transac.Pin = pin;
-            return Transac.Pin = pin;
+            User.Pin = pin;
+            return User.Pin = pin;
         }
 
-        public static decimal GetBalance(int balance)
+        public static decimal GetBalance(int id)
         {
             db = new DataClasses1DataContext();
-            db.GetBalance(balance);
-            Transac.Balance = balance;
-            return Transac.Balance = balance;
+            db.GetBalance(id);
+            Transac.id = id;
+            return Transac.id;
+        }  
+        
+        public static int GetUserId(string username, string password)
+        {
+            db = new DataClasses1DataContext();
+            int id = (int)db.getUserId(username, password);          
+            return id; 
         }
     }
 }
