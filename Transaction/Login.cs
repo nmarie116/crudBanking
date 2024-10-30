@@ -18,7 +18,7 @@ namespace Transaction
         {
             InitializeComponent();
         }
-
+        Repositories repo = new Repositories();
         tblUser tblUser = new tblUser();
         DataClasses1DataContext db = new DataClasses1DataContext();
          
@@ -27,7 +27,10 @@ namespace Transaction
         {
             if(ValidateCredential(txtUsername.Text ,txtPassword.Text))
             {
-                User.Userid = (int)db.getUserId(txtUsername.Text, txtPassword.Text);               
+
+                User.Userid = (int)db.getUserId(txtUsername.Text, txtPassword.Text);
+                Repositories.getFname(User.Userid);
+                Repositories.getLname(User.Userid);
                 MessageBox.Show("successfully login");
                 Clear();
                 this.Hide();

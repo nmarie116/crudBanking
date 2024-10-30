@@ -46,13 +46,14 @@ namespace Transaction
                         tblUser.userId = User.Userid;
                         tblUser.Balance = (int?)_cAmount;
                         tblUser.username = User.Username;
-                        tblUser.upassword = User.Password;
+                        tblUser.upassword = User.Password; 
                         tblUser.userpin = User.Pin;
                         tblUser.fname = User.Fname;
                         tblUser.lname = User.Lname;
                         Repositories.UpdateUser(tblUser);
                         Repositories.AddTra(tblTrans);
-                        Clear();                   
+                        lblBalance.Text = $"{db.GetBalance(User.Userid)}";
+                    Clear();                   
                    
                 }
                 else
@@ -98,13 +99,21 @@ namespace Transaction
                 if (cashAmount >= db.GetBalance(User.Userid) || cashAmount <= db.GetBalance(User.Userid))
                 {
                     decimal _cAmount = (decimal)db.GetBalance(User.Userid) + cashAmount;
-                    tblTrans.userid = User.Userid;
+                    Repositories.GetBalance(User.Userid);
+                    tblTrans.userid = userid;
                     tblTrans.transDate = now;
-                    tblTrans.amount = _cAmount;
+                    tblTrans.amount = cashAmount;
                     tblTrans.transType = transType;
+                    tblUser.userId = User.Userid;
                     tblUser.Balance = (int?)_cAmount;
+                    tblUser.username = User.Username;
+                    tblUser.upassword = User.Password;
+                    tblUser.userpin = User.Pin;
+                    tblUser.fname = User.Fname;
+                    tblUser.lname = User.Lname;
                     Repositories.UpdateUser(tblUser);
                     Repositories.AddTra(tblTrans);
+                    lblBalance.Text = $"{db.GetBalance(User.Userid)}";
                     Clear();
                 }
                 else
@@ -161,6 +170,6 @@ namespace Transaction
         {
             txtDeposite.Clear();
             txtEnterCash.Clear();
-        }
+        }        
     }
 }

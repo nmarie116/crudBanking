@@ -104,6 +104,27 @@ namespace Transaction
             int id = (int)db.getUserId(username, password);          
             return id; 
         }
+
+        public static void getname(int id)
+        {
+            db = new DataClasses1DataContext();
+            db.getname(id);             
+        }
+     
+
+        public static void getFname(int id)
+        {
+            db = new DataClasses1DataContext();
+            User.Fname = db.getFname(id);
+        }
+
+        public static void getLname(int id)
+        {
+            db = new DataClasses1DataContext();
+            User.Lname = db.getLname(id);
+        }
+
+
     }
 }
 

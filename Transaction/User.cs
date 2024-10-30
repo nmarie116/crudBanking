@@ -15,6 +15,7 @@ namespace Transaction
         public static int Pin { get; set; }
         public static decimal Balance { get; set; }
         public static int Userid { get; set; }  
+        public static string Fullname { get; set;}
 
     }
 }
